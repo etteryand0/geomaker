@@ -2,16 +2,17 @@ import React from 'react';
 
 import styles from '../styles';
 import { 
-  View, Text, 
-  Button
+  View,
 } from 'react-native';
 
 import Map from '../Map/Map.jsx';
+import Footer from '../Footer.jsx';
 
 export default function HomeScreen({ navigation }) {
-    return (
-      <View style={styles.home}>
-        <Map />
-      </View>
-    );
-  }
+  return (
+    <View style={styles.home}>
+      <Map />
+      <Footer />
+    </View>
+  );
+}
