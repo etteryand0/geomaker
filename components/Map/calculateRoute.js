@@ -1,7 +1,7 @@
 import PolylineTool from './decodePolyline';
 
 // REMOVE API BEFORE COMMITTING
-const APIuri = 'https://router.hereapi.com/v8/routes?transportMode=pedestrian&return=polyline,summary&apiKey=__';
+const APIuri = 'https://router.hereapi.com/v8/routes?transportMode=pedestrian&return=summary,polyline&apiKey=______&avoidance[features]=tollRoad;cemetary'; //&spans=names,length
 
 export default function calculateRoute(mapCoordinates) {
   // generate waypoints params  
@@ -14,9 +14,8 @@ export default function calculateRoute(mapCoordinates) {
 
   
   mapCoordinates.forEach(coord => {
-    params += `&via=${coord.latitude},${coord.longitude}`;
+    params += `&via=${coord.latitude},${coord.longitude}!passThrough=true`;
   });
-  
   // geojson features template to save response
   let features = []
   // send api request 
@@ -27,6 +26,12 @@ export default function calculateRoute(mapCoordinates) {
     .then(data => {
       // save response into geojson features
       let geometry = [];
+      try {
+        data.routes[0].sections;
+      } catch (error) {
+        console.log(error);
+        return [];
+      }
       data.routes[0].sections.forEach(section => {
         const polyline = PolylineTool.decode(section.polyline).polyline;
         let lineString = [];

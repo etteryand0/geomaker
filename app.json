@@ -23,7 +23,13 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyBZrX19qU7FrGFz8_68ZcKcwHrZUMcx8oo"
+        }
+      },
+      "package": "com.etteryand.geohackathon"
     },
     "web": {
       "favicon": "./assets/favicon.png"
